@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>I Henk it</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="images/henk.png">
+</head>
+<body>
+
+<div class="container">
+	<section id="installation">
+		<div class="page-header">
+			<h1>Installatie</h1>
+		</div>
+
+		<div class="span6 offset2">
+			<div>
+				<ul class="nav nav-tabs" id="tabs">
+					<li class="active"><a href="#firefox" data-toggle="tab">Firefox</a></li>
+					<li><a href="#chrome" data-toggle="tab">Chrome</a></li>
+					<li><a href="#opera" data-toggle="tab">Opera</a></li>
+					<li><a href="#safari" data-toggle="tab">Safari</a></li>
+					<li><a href="#ie" data-toggle="tab">Internet Explorer</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="firefox">
+						<ol class="pull-left">
+							<li>Installeer GreaseMonkey <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">hier</a></li>
+							<li>Herstart Firefox</li>
+							<li>Installeer I Henk It via <a href="gm/IHenkIt/IHenkIt.user.js">deze link</a></li>
+							<li>Henk artikelen en topics op <a href="http://tweakers.net">Tweakers</a></li>
+						</ol>
+						<img src="images/firefox-logo.png" width="128" height="128" class="pull-right">
+					</div>
+					<div class="tab-pane" id="chrome">
+						<ol class="pull-left">
+							<li>Installeer TamperMonkey <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo">hier</a></li>
+							<li>Installeer I Henk It via <a href="gm/IHenkIt/IHenkIt.user.js">deze link</a></li>
+							<li>Henk artikelen en topics op <a href="http://tweakers.net">Tweakers</a></li>
+						</ol>
+						<img src="images/chrome-logo.png" width="128" height="128" class="pull-right">
+					</div>
+					<div class="tab-pane" id="opera">
+						Nog niet...
+					</div>
+					<div class="tab-pane" id="safari">
+						Nog niet...
+					</div>
+					<div class="tab-pane" id="ie">
+						Nee. Nooit.
+					</div>
+
+					<img src="images/screenshot.png">
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="statistics" class="pull-left">
+		<div class="page-header">
+			<h1>Statistieken</h1>
+		</div>
+
+		<div class="span5">
+			<h5><i class="icon-list"></i> Gehenkte content</h5>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Id</th>
+						<th>Henks</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for content in groupedHenks %}
+					<tr>
+						<td>{{ content.contentType }}</td>
+						<td>{{ content.contentId }}</td>
+						<td>{{ content.henks }}</td>
+					</tr>
+					{%endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="span5 offset1">
+			<h5><i class="icon-star-empty"></i> Laatst gehenkt</h5>
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Url</th>
+					<th>Om</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for content in lastHenked %}
+				<tr>
+					<td>{{ content.contentType }}</td>
+					<td>{{ content.created.timestamp|date('H:i:s') }}</td>
+				</tr>
+				{%endfor %}
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/henk.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+#RewriteEngine on
+#RewriteCond %{HTTP_HOST} ^ihenkit.eu01.aws.af.cm$ [NC,OR]
+#RewriteCond %{HTTP_HOST} ^ihenkit.eu01.aws.af.cm$
+#RewriteCond %{REQUEST_URI} !web/
+#RewriteRule (.*) /web/$1 [L]
+
+FallbackResource /web/index.php
