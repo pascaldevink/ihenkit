@@ -3,17 +3,23 @@
 // @namespace   Tweakers
 // @description IHenkIt button on http://tweakers.net
 // @include     http://tweakers.net/*
+// @include     https://tweakers.net/*
 // @include     http://www.tweakers.net/*
+// @include     https://www.tweakers.net/*
 // @include     http://gathering.tweakers.net/*
-// @version     1
+// @include     https://gathering.tweakers.net/*
+// @version     1.0.3
 // ==/UserScript==
 
 var serverUrl = 'http://ihenk.it';
 //var serverUrl = 'http://localhost:4567';
-//var serverUrl = 'http://ihenkit.eu1.frbit.net';
 
 // CSS Styles
-var css = "#ihenkit #numberOfHenks {" +
+var css = "" +
+	"#ihenkit {" +
+	"  margin-bottom: 10px;" +
+	"}" +
+	"#ihenkit #numberOfHenks {" +
 	"  position: relative;" +
 	"  float: left;" +
 	"  height: 23px;" +
@@ -37,77 +43,91 @@ var henkImage = 'R0lGODlhegAjANUAALmyg2xMD4hlBoGes/GyAYWFhrq7u//VBMXFxZmYmOTl5nB
 var userBar = document.getElementById('userbar');
 var isLoggedIn = userBar.className == 'loggedin';
 
-var data;
-
 if (isLoggedIn)
 {
 	var galleryUrl = userBar.children[0].children[1].children[0].children[0].children[0].attributes[0].value;
 	var userId = galleryUrl.substring(galleryUrl.lastIndexOf('/')+1);
+}
 
-	GM_xmlhttpRequest({
-		method: "GET",
-		url: serverUrl+"/list?userId=266225&url="+window.location.href,
-		onload: function(response) {
-			if (response.status != 200)
-			{
-				console.log(response);
+var data;
+
+if (isLoggedIn && userId)
+{
+	// Determine if the current url is even supported
+	var location = window.location;
+	var parsedPath = parseUrlPath(location.pathname);
+
+	if (parsedPath !== false)
+	{
+		GM_xmlhttpRequest({
+			method: "GET",
+			url: serverUrl+"/list?userId="+userId+"&url="+location.href,
+			onload: function(response) {
+				if (response.status != 200)
+				{
+					console.log(response);
+
+					data = eval("(" + response.responseText + ")");
+					if (data.error.code !== 600)
+						alert('Er is iets mis gegaan tijdens het Henken: error code ' + data.error.code);
+
+					return;
+				}
 
 				data = eval("(" + response.responseText + ")");
-				if (data.error.code !== 600)
-					alert('Er is iets mis gegaan tijdens het Henken: error code ' + data.error.code);
+				var nrOfHenks = data.henks;
 
-				return;
-			}
+				var head = document.getElementsByTagName('head')[0];
+				var style = document.createElement('style');
+				style.type = 'text/css';
+				if(style.styleSheet){
+					style.styleSheet.cssText = css;
+				}else{
+					style.appendChild(document.createTextNode(css));
+				}
+				head.appendChild(style);
 
-			data = eval("(" + response.responseText + ")");
-			var nrOfHenks = data.henks;
+				var button = insertHenkButtonOnPage(nrOfHenks);
 
-			var head = document.getElementsByTagName('head')[0];
-			var style = document.createElement('style');
-			style.type = 'text/css';
-			if(style.styleSheet){
-				style.styleSheet.cssText = css;
-			}else{
-				style.appendChild(document.createTextNode(css));
-			}
-			head.appendChild(style);
+				button.addEventListener('click', function() {
+					GM_xmlhttpRequest({
+						method: "POST",
+						url: serverUrl+"/henk",
+						data: "userId="+userId+"&url="+location.href,
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded"
+						},
+						onload: function(response) {
+							if (response.status != 200)
+							{
+								console.log(response);
+								data = eval("(" + response.responseText + ")");
 
-			var button = insertHenkButtonOnPage(nrOfHenks);
+								if (data.error.code == 600)
+									alert('Deze kun je (nog) niet Henken, helaas.');
+								else if (data.error.code == 5)
+									alert('Je hebt deze al geHenkt!');
+								else
+									alert('Er is iets mis gegaan tijdens het Henken: error code ' + data.error.code);
 
-			button.addEventListener('click', function() {
-				GM_xmlhttpRequest({
-					method: "POST",
-					url: serverUrl+"/henk",
-					data: "userId="+userId+"&url="+window.location.href,
-					headers: {
-						"Content-Type": "application/x-www-form-urlencoded"
-					},
-					onload: function(response) {
-						if (response.status != 200)
-						{
-							console.log(response);
+								return;
+							}
+
 							data = eval("(" + response.responseText + ")");
+							nrOfHenks = data.henks;
 
-							if (data.error.code == 600)
-								alert('Deze kun je (nog) niet Henken, helaas.');
-							else if (data.error.code == 5)
-								alert('Je hebt deze al geHenkt!');
-							else
-								alert('Er is iets mis gegaan tijdens het Henken: error code ' + data.error.code);
-
-							return;
+							var henksBlock = document.getElementById('numberOfHenks');
+							henksBlock.innerHTML = nrOfHenks;
 						}
-
-						data = eval("(" + response.responseText + ")");
-						nrOfHenks = data.henks;
-
-						var henksBlock = document.getElementById('numberOfHenks');
-						henksBlock.innerHTML = nrOfHenks;
-					}
+					});
 				});
-			});
-		}
-	});
+			}
+		});
+	}
+}
+else
+{
+	console.log('logged in: ' + isLoggedIn);
 }
 
 function insertHenkButtonOnPage(nrOfHenks)
@@ -135,6 +155,16 @@ function insertHenkButtonOnPage(nrOfHenks)
 		var actionList = document.getElementsByClassName('action_list')[0];
 		actionList.appendChild(listItem);
 	}
+	else if (pathname.indexOf('meuktracker') > 0)
+	{
+		// Content page
+		var clearBreak = document.createElement('br');
+		clearBreak.className = 'clear';
+		buttonWrapper.appendChild(clearBreak);
+
+		var sidebar = document.getElementsByClassName('sidebar')[0];
+		sidebar.insertBefore(buttonWrapper, sidebar.childNodes[0]);
+	}
 	else
 	{
 		// Content page
@@ -147,4 +177,49 @@ function insertHenkButtonOnPage(nrOfHenks)
 	}
 
 	return button;
+}
+
+function parseUrlPath(path)
+{
+	var paths = path.split('/');
+	var contentType, contentId;
+
+	switch(paths[1])
+	{
+		case 'forum':
+			switch(paths[2])
+			{
+				case 'list_messages':
+					contentType = 'ForumTopic';
+					contentId = paths[3];
+					break;
+				default:
+					return false;
+			}
+			break;
+		case 'nieuws':
+			contentType = 'News';
+			contentId = paths[2];
+			break;
+		case 'reviews':
+			contentType = 'Review';
+			contentId = paths[2];
+			break;
+		case 'video':
+			contentType = 'Video';
+			contentId = paths[2];
+			break;
+		case 'meuktracker':
+			contentType = 'Download';
+			contentId = paths[2];
+			break;
+		default:
+			return false;
+	}
+
+	if (!contentType || !contentId)
+		return false;
+
+	var parsedPath = {'contentType': contentType, 'contentId': contentId};
+	return parsedPath;
 }
