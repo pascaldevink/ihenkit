@@ -7,4 +7,6 @@ jQuery.each(jQuery.browser, function(i) {
 		$('#tabs a[href="#chrome"]').tab('show');
 	else if($.browser.opera)
 		$('#tabs a[href="#opera"]').tab('show');
+	else if($.browser.safari)
+		$('#tabs a[href="#safari"]').tab('show');
 });
