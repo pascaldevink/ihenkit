@@ -8,7 +8,7 @@
 // @include     https://www.tweakers.net/*
 // @include     http://gathering.tweakers.net/*
 // @include     https://gathering.tweakers.net/*
-// @version     1.0.3
+// @version     1.1
 // ==/UserScript==
 
 var serverUrl = 'http://ihenk.it';
@@ -18,6 +18,11 @@ var serverUrl = 'http://ihenk.it';
 var css = "" +
 	"#ihenkit {" +
 	"  margin-bottom: 10px;" +
+	"}" +
+	"h1 > #ihenkit {" +
+	"  display: inline-block;" +
+	"  margin-left: 10px;" +
+	"  margin-bottom: 0;" +
 	"}" +
 	"#ihenkit #numberOfHenks {" +
 	"  position: relative;" +
@@ -31,6 +36,8 @@ var css = "" +
 	"  font-size: 11px;" +
 	"  border: 1px solid #CCCCCC;" +
 	"  border-radius: 3px;" +
+	"  line-height: 14px;" +
+	"  background-color: #fff;" +
 	"}" +
 	"#ihenkit img {" +
 	"  cursor: pointer;" +
@@ -155,15 +162,25 @@ function insertHenkButtonOnPage(nrOfHenks)
 		var actionList = document.getElementsByClassName('action_list')[0];
 		actionList.appendChild(listItem);
 	}
-	else if (pathname.indexOf('meuktracker') > 0)
+	else if (pathname.indexOf('meuktracker') > 0 || pathname.indexOf('blog') > 0)
 	{
-		// Content page
+		// Meuktracker or tweakblog page
 		var clearBreak = document.createElement('br');
 		clearBreak.className = 'clear';
 		buttonWrapper.appendChild(clearBreak);
 
 		var sidebar = document.getElementsByClassName('sidebar')[0];
 		sidebar.insertBefore(buttonWrapper, sidebar.childNodes[0]);
+	}
+	else if (pathname.indexOf('gallery') > 0)
+	{
+		// Gallery page
+		var clearBreak = document.createElement('br');
+		clearBreak.className = 'clear';
+		buttonWrapper.appendChild(clearBreak);
+
+		var galleryHeading = document.getElementsByClassName('galleryHeading')[0].children[1].children[0];
+		galleryHeading.appendChild(buttonWrapper);
 	}
 	else
 	{
@@ -211,6 +228,18 @@ function parseUrlPath(path)
 			break;
 		case 'meuktracker':
 			contentType = 'Download';
+			contentId = paths[2];
+			break;
+		case 'gallery':
+			contentType = 'Userprofile';
+			contentId = paths[2];
+			break;
+		case 'aanbod':
+			contentType = 'Advertisement';
+			contentId = paths[2];
+			break;
+		case 'productreview':
+			contentType = 'Productreview';
 			contentId = paths[2];
 			break;
 		default:

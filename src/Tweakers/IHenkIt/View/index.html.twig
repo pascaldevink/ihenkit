@@ -80,8 +80,20 @@
 				<tbody>
 					{% for content in groupedHenks %}
 					<tr>
-						<td>{{ content.contentType }}</td>
-						<td>{{ content.contentId }}</td>
+						<td>
+							{% if content.url %}
+								<a target="_blank" href="{{ content.url }}">{{ content.contentType }}</a>
+							{% else %}
+								{{ content.contentType }}
+							{% endif %}
+						</td>
+						<td>
+							{% if content.url %}
+								<a target="_blank" href="{{ content.url }}">{{ content.contentId }}</a>
+							{% else %}
+								{{ content.contentId }}
+							{% endif %}
+						</td>
 						<td>{{ content.henks }}</td>
 					</tr>
 					{%endfor %}
@@ -101,7 +113,13 @@
 				<tbody>
 				{% for content in lastHenked %}
 				<tr>
-					<td>{{ content.contentType }}</td>
+					<td>
+						{% if content.url %}
+							<a target="_blank" href="{{ content.url }}">{{ content.contentType }}</a>
+						{% else %}
+							{{ content.contentType }}
+						{% endif %}
+					</td>
 					<td>{{ content.created.timestamp|date('H:i:s') }}</td>
 				</tr>
 				{%endfor %}

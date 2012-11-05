@@ -42,7 +42,7 @@ class HenkController
 			return $app->json(array('error' => array('code' => 600, 'msg' => 'not supported yet.')), 400);
 		}
 
-		$couldHenk = $this->henkService->addHenk($parsedPath->getContentType(), $parsedPath->getContentId(), $userId);
+		$couldHenk = $this->henkService->addHenk($parsedPath->getContentType(), $parsedPath->getContentId(), $userId, $url);
 
 		if (!$couldHenk)
 			return $app->json(array('error' => array('code' => 5, 'msg' => 'user already henked this content.')), 400);

@@ -31,6 +31,12 @@ class Henk
 	 **/
 	private $created;
 
+	/**
+	 * @Column(type="string")
+	 * @var string
+	 */
+	private $url;
+
 	public function setContentId($contentId)
 	{
 		$this->contentId = $contentId;
@@ -69,5 +75,21 @@ class Henk
 	public function setCreated($created)
 	{
 		$this->created = $created;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		return $this->url;
+	}
+
+	/**
+	 * @param string $url
+	 */
+	public function setUrl($url)
+	{
+		$this->url = $url;
 	}
 }

@@ -49,6 +49,18 @@ class UrlParser
 				$contentType = 'Download';
 				$contentId = $path[2];
 				break;
+			case 'gallery':
+				$contentType = 'Userprofile';
+				$contentId = $path[2];
+				break;
+			case 'aanbod':
+				$contentType = 'Advertisement';
+				$contentId = $path[2];
+				break;
+			case 'productreview':
+				$contentType = 'Productreview';
+				$contentId = $path[2];
+				break;
 			default:
 				throw new \Tweakers\IHenkIt\Exception\NotSupportedException();
 		}

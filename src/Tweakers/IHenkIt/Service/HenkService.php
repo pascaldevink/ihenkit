@@ -16,44 +16,21 @@ class HenkService
 
 	public function getListOfHenkedContent()
 	{
-		$dql = "SELECT h FROM Tweakers\IHenkIt\Entity\Henk h ORDER BY h.created DESC";
+		$dql = "
+		SELECT
+			count(h.contentType) as henks, h.contentType, h.contentId, h.url
+		FROM
+			Tweakers\IHenkIt\Entity\Henk h
+		GROUP BY
+			h.contentType, h.contentId
+		ORDER BY
+			henks DESC";
 
 		$query = $this->entityManager->createQuery($dql);
-		$query->setMaxResults(500);
-
-		/**
-		 * @var $henks \Tweakers\IHenkIt\Entity\Henk[]
-		 */
+		$query->setMaxResults(10);
 		$henks = $query->getResult();
 
-		$groupedHenks = array();
-		foreach($henks as $henk)
-		{
-			$identifier = $henk->getContentType().'-'.$henk->getContentId();
-			if (!isset($groupedHenks[$identifier]))
-			{
-				$groupedHenks[$identifier] = array(
-					'contentType' => $henk->getContentType(),
-					'contentId' => $henk->getContentId(),
-					'henks' => 0);
-			}
-
-			$groupedHenks[$identifier]['henks']++;
-		}
-
-		usort($groupedHenks, array($this, 'orderByHenks'));
-
-		return $groupedHenks;
-	}
-
-	public function orderByHenks($content1, $content2)
-	{
-		if ($content1['henks'] > $content2['henks'])
-			return -1;
-		else if ($content1['henks'] < $content2['henks'])
-			return 1;
-
-		return 0;
+		return $henks;
 	}
 
 	public function getLastHenked()
@@ -97,17 +74,19 @@ class HenkService
 	 * @param $contentType
 	 * @param $contentId
 	 * @param $userId
+	 * @param $url
 	 *
-	 * @return bool
 	 * @throws \Doctrine\DBAL\DBALException
+	 * @return bool
 	 */
-	public function addHenk($contentType, $contentId, $userId)
+	public function addHenk($contentType, $contentId, $userId, $url)
 	{
 		$henk = new \Tweakers\IHenkIt\Entity\Henk();
 		$henk->setContentType($contentType);
 		$henk->setContentId($contentId);
 		$henk->setUserId($userId);
 		$henk->setCreated(new \DateTime());
+		$henk->setUrl($url);
 
 		try
 		{

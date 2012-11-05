@@ -4,7 +4,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app = new Silex\Application();
 
 // Debugging
-if ($_GET['userId'] == 266225 || $_POST['userId'] == 266225 || $_GET['trace'] = 1)
+if ((isset($_REQUEST['userId']) && $_REQUEST['userId'] == 266225) || $_GET['trace'] = 1)
 	$app['debug'] = true;
 
 // Database configuration
