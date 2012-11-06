@@ -62,7 +62,8 @@ class BuildController
 			$returnValue,
 			200,
 			array(
-				'Cache-Control' => 'public'
+				'Cache-Control' => 'public',
+				'Access-Control-Allow-Origin' => '*'
 			));
 	}
 }

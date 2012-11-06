@@ -55,6 +55,11 @@ class HenkController
 			'henks'			=> $nrOfHenks
 		);
 
-		return $app->json($returnValue, 200);
+		return $app->json(
+			$returnValue,
+			200,
+			array(
+				'Access-Control-Allow-Origin' => '*'
+			));
 	}
 }
