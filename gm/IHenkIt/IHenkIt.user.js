@@ -33,13 +33,18 @@
     Henk.prototype.init = function() {
       var galleryUrl, isLoggedIn, parsedPath, userBar, userId,
         _this = this;
-      userBar = document.getElementById('userbar');
-      isLoggedIn = (userBar != null ? userBar.className : void 0) === 'loggedin';
-      if (isLoggedIn) {
-        galleryUrl = userBar.children[0].children[1].children[0].children[0].children[0].attributes[0].value;
-        userId = galleryUrl.substring(galleryUrl.lastIndexOf('/') + 1);
+      if (typeof UserID !== 'undefined') {
+        userId = UserID;
       }
-      if (isLoggedIn && userId) {
+      if (!userId) {
+        userBar = document.getElementById('userbar');
+        isLoggedIn = (userBar != null ? userBar.className : void 0) === 'loggedin';
+        if (isLoggedIn) {
+          galleryUrl = userBar.children[0].children[1].children[0].children[0].children[0].attributes[0].value;
+          userId = galleryUrl.substring(galleryUrl.lastIndexOf('/') + 1);
+        }
+      }
+      if (typeof userId !== 'undefined') {
         parsedPath = this.parseUrlPath(window.location.href, location.pathname);
         if (parsedPath !== false) {
           return this.doXmlHttpRequest({

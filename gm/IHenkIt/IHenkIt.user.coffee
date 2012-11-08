@@ -50,14 +50,20 @@ class Henk
   constructor: (@serverUrl) ->
 
   init: ->
-    userBar = document.getElementById 'userbar';
-    isLoggedIn = userBar?.className is 'loggedin';
+    # Get the user id from the set UserID (opera can do this)
+    if typeof UserID isnt 'undefined'
+      userId = UserID
 
-    if isLoggedIn
-      galleryUrl = userBar.children[0].children[1].children[0].children[0].children[0].attributes[0].value;
-      userId = galleryUrl.substring(galleryUrl.lastIndexOf('/')+1);
+    # If it was not set, get it from the menu
+    if (!userId)
+      userBar = document.getElementById 'userbar';
+      isLoggedIn = userBar?.className is 'loggedin';
 
-    if isLoggedIn and userId
+      if isLoggedIn
+        galleryUrl = userBar.children[0].children[1].children[0].children[0].children[0].attributes[0].value;
+        userId = galleryUrl.substring(galleryUrl.lastIndexOf('/')+1);
+
+    if typeof userId isnt 'undefined'
       # Determine if the current url is even supported
       parsedPath = @parseUrlPath(window.location.href, location.pathname);
 
