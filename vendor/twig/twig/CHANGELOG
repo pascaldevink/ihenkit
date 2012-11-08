@@ -1,3 +1,13 @@
+* 1.11.0 (2012-11-07)
+
+ * fixed macro compilation when a variable name is a PHP reserved keyword
+ * changed the date filter behavior to always apply the default timezone, except if false is passed as the timezone
+ * fixed bitwise operator precedences
+ * added the template_from_string function
+ * fixed default timezone usage for the date function
+ * optimized the way Twig exceptions are managed (to make them faster)
+ * added Twig_ExistsLoaderInterface (implementing this interface in your loader make the chain loader much faster)
+
 * 1.10.3 (2012-10-19)
 
  * fixed wrong template location in some error messages

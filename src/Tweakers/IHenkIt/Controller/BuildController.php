@@ -22,10 +22,20 @@ class BuildController
 		$groupedHenks = $this->henkService->getListOfHenkedContent();
 		$lastHenked = $this->henkService->getLastHenked();
 
-		return $app['twig']->render('index.html.twig', array(
+		$content = $app['twig']->render('index.html.twig', array(
 			'groupedHenks' => $groupedHenks,
 			'lastHenked' => $lastHenked
 		));
+
+		$response = new Response(
+			$content,
+			200,
+			array(
+				'Cache-Control' => 'public',
+			)
+		);
+
+		return $response;
 	}
 
 	public function buttonAction(\Silex\Application $app, Request $request)
@@ -64,6 +74,7 @@ class BuildController
 			array(
 				'Cache-Control' => 'public',
 				'Access-Control-Allow-Origin' => '*'
-			));
+			)
+		);
 	}
 }

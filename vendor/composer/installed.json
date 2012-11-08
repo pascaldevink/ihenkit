@@ -485,61 +485,6 @@
         ]
     },
     {
-        "name": "dflydev/doctrine-orm-service-provider",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider",
-            "reference": "c4efa69f00658e3ba1e67e6c2bb1c20e918aed3c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider/zipball/c4efa69f00658e3ba1e67e6c2bb1c20e918aed3c",
-            "reference": "c4efa69f00658e3ba1e67e6c2bb1c20e918aed3c",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "silex/silex": "1.*@dev",
-            "doctrine/orm": ">=2.3,<2.4-dev"
-        },
-        "time": "2012-10-26 10:24:06",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Dflydev\\Silex\\Provider\\DoctrineOrm": "src"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Dragonfly Development Inc.",
-                "email": "info@dflydev.com",
-                "homepage": "http://dflydev.com"
-            },
-            {
-                "name": "Beau Simensen",
-                "email": "beau@dflydev.com",
-                "homepage": "http://beausimensen.com"
-            }
-        ],
-        "description": "Doctrine ORM Service Provider",
-        "keywords": [
-            "silex",
-            "orm",
-            "doctrine"
-        ]
-    },
-    {
         "name": "symfony/console",
         "version": "v2.1.3",
         "version_normalized": "2.1.3.0",
@@ -588,68 +533,18 @@
         "homepage": "http://symfony.com"
     },
     {
-        "name": "twig/twig",
-        "version": "v1.10.3",
-        "version_normalized": "1.10.3.0",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/fabpot/Twig.git",
-            "reference": "v1.10.3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/fabpot/Twig/zipball/v1.10.3",
-            "reference": "v1.10.3",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.4"
-        },
-        "time": "2012-10-19 03:45:49",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.10-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Twig_": "lib/"
-            }
-        },
-        "license": [
-            "BSD-3"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com"
-            }
-        ],
-        "description": "Twig, the flexible, fast, and secure template language for PHP",
-        "homepage": "http://twig.sensiolabs.org",
-        "keywords": [
-            "templating"
-        ]
-    },
-    {
         "name": "silex/silex",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "git://github.com/fabpot/Silex.git",
-            "reference": "69d710011ee8f9fa286854fcf636a07ad76b570b"
+            "reference": "04feaff05e6cb0437f405e715adb720dccf8313a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/fabpot/Silex/zipball/69d710011ee8f9fa286854fcf636a07ad76b570b",
-            "reference": "69d710011ee8f9fa286854fcf636a07ad76b570b",
+            "url": "https://github.com/fabpot/Silex/archive/04feaff05e6cb0437f405e715adb720dccf8313a.zip",
+            "reference": "04feaff05e6cb0437f405e715adb720dccf8313a",
             "shasum": ""
         },
         "require": {
@@ -684,7 +579,7 @@
             "symfony/css-selector": ">=2.1,<2.3-dev",
             "symfony/dom-crawler": ">=2.1,<2.3-dev"
         },
-        "time": "2012-10-29 13:01:38",
+        "time": "2012-11-06 16:32:11",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -715,6 +610,114 @@
         "homepage": "http://silex.sensiolabs.org",
         "keywords": [
             "microframework"
+        ]
+    },
+    {
+        "name": "twig/twig",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/fabpot/Twig.git",
+            "reference": "v1.11.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/fabpot/Twig/archive/v1.11.0.zip",
+            "reference": "v1.11.0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2012-11-07 11:20:21",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        },
+        "license": [
+            "BSD-3"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "dflydev/doctrine-orm-service-provider",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider",
+            "reference": "b6693ea09cc810d6deb0afa290b5bf1763673030"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider/archive/b6693ea09cc810d6deb0afa290b5bf1763673030.zip",
+            "reference": "b6693ea09cc810d6deb0afa290b5bf1763673030",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "silex/silex": "1.*@dev",
+            "doctrine/orm": ">=2.3,<3.0"
+        },
+        "suggest": {
+            "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev"
+        },
+        "time": "2012-11-07 23:34:35",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Dflydev\\Silex\\Provider\\DoctrineOrm": "src"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Dragonfly Development Inc.",
+                "email": "info@dflydev.com",
+                "homepage": "http://dflydev.com"
+            },
+            {
+                "name": "Beau Simensen",
+                "email": "beau@dflydev.com",
+                "homepage": "http://beausimensen.com"
+            }
+        ],
+        "description": "Doctrine ORM Service Provider",
+        "keywords": [
+            "silex",
+            "orm",
+            "doctrine"
         ]
     }
 ]

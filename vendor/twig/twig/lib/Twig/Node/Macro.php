@@ -31,7 +31,7 @@ class Twig_Node_Macro extends Twig_Node
     {
         $arguments = array();
         foreach ($this->getNode('arguments') as $argument) {
-            $arguments[] = '$'.$argument->getAttribute('name').' = null';
+            $arguments[] = '$_'.$argument->getAttribute('name').' = null';
         }
 
         $compiler
@@ -52,7 +52,7 @@ class Twig_Node_Macro extends Twig_Node
                 $compiler
                     ->write('')
                     ->string($argument->getAttribute('name'))
-                    ->raw(' => $'.$argument->getAttribute('name'))
+                    ->raw(' => $_'.$argument->getAttribute('name'))
                     ->raw(",\n")
                 ;
             }
@@ -70,7 +70,7 @@ class Twig_Node_Macro extends Twig_Node
             ->indent()
             ->subcompile($this->getNode('body'))
             ->outdent()
-            ->write("} catch(Exception \$e) {\n")
+            ->write("} catch (Exception \$e) {\n")
             ->indent()
             ->write("ob_end_clean();\n\n")
             ->write("throw \$e;\n")

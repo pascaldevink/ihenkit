@@ -65,7 +65,8 @@ class HenkService
 		$query->setParameter('contentId', $contentId);
 		$henks = $query->getScalarResult();
 
-		$nrOfHenks = current($henks)['henks'];
+		$currentHenk = current($henks);
+		$nrOfHenks = $currentHenk['henks'];
 
 		return (int)$nrOfHenks;
 	}
