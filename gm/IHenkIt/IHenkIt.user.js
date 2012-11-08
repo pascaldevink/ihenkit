@@ -11,7 +11,7 @@
 // @include     https://www.tweakers.net/*
 // @include     http://gathering.tweakers.net/*
 // @include     https://gathering.tweakers.net/*
-// @version     1.2
+// @version     1.3
 // ==/UserScript==
 */
 
@@ -31,7 +31,7 @@
     }
 
     Henk.prototype.init = function() {
-      var galleryUrl, isLoggedIn, location, parsedPath, userBar, userId,
+      var galleryUrl, isLoggedIn, parsedPath, userBar, userId,
         _this = this;
       userBar = document.getElementById('userbar');
       isLoggedIn = (userBar != null ? userBar.className : void 0) === 'loggedin';
@@ -40,12 +40,11 @@
         userId = galleryUrl.substring(galleryUrl.lastIndexOf('/') + 1);
       }
       if (isLoggedIn && userId) {
-        location = window.location;
-        parsedPath = this.parseUrlPath(location.pathname);
+        parsedPath = this.parseUrlPath(window.location.href, location.pathname);
         if (parsedPath !== false) {
           return this.doXmlHttpRequest({
             method: "GET",
-            url: serverUrl + "/list?userId=" + userId + "&url=" + location.href,
+            url: serverUrl + "/list?userId=" + userId + "&url=" + parsedPath.url,
             onload: function(response) {
               var button, data, head, nrOfHenks, style;
               if (response.status !== 200) {
@@ -117,7 +116,7 @@
       henksBlock.innerHTML = nrOfHenks;
       buttonWrapper.appendChild(henksBlock);
       pathname = window.location.pathname;
-      if (pathname.indexOf('list_messages') > 0) {
+      if (pathname.indexOf('list_messages') > 0 || pathname.indexOf('list_message') > 0) {
         listItem = document.createElement('li');
         listItem.appendChild(buttonWrapper);
         actionList = document.getElementsByClassName('action_list')[0];
@@ -144,8 +143,8 @@
       return button;
     };
 
-    Henk.prototype.parseUrlPath = function(path) {
-      var contentId, contentType, parsedPath, paths;
+    Henk.prototype.parseUrlPath = function(url, path) {
+      var contentId, contentType, head, link, parsedPath, paths, regexp, tempParsed, _i, _len, _ref;
       paths = path.split('/');
       switch (paths[1]) {
         case 'forum':
@@ -153,6 +152,21 @@
             case 'list_messages':
               contentType = 'ForumTopic';
               contentId = paths[3];
+              break;
+            case 'list_message':
+              head = document.getElementsByTagName('head')[0];
+              _ref = head.getElementsByTagName('link');
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                link = _ref[_i];
+                if (link.getAttribute('rel') === 'canonical') {
+                  url = link.getAttribute('href');
+                  regexp = /.+?\:\/\/.+?(\/.+?)(?:#|\?|$)/;
+                  path = regexp.exec(url);
+                  tempParsed = this.parseUrlPath(url, path[1]);
+                  contentType = tempParsed.contentType;
+                  contentId = tempParsed.contentId;
+                }
+              }
               break;
             default:
               return false;
@@ -194,7 +208,8 @@
       }
       parsedPath = {
         'contentType': contentType,
-        'contentId': contentId
+        'contentId': contentId,
+        'url': url
       };
       return parsedPath;
     };

@@ -9,7 +9,7 @@
 // @include     https://www.tweakers.net/*
 // @include     http://gathering.tweakers.net/*
 // @include     https://gathering.tweakers.net/*
-// @version     1.2
+// @version     1.3
 // ==/UserScript==
 ###
 
@@ -59,13 +59,12 @@ class Henk
 
     if isLoggedIn and userId
       # Determine if the current url is even supported
-      location = window.location;
-      parsedPath = @parseUrlPath(location.pathname);
+      parsedPath = @parseUrlPath(window.location.href, location.pathname);
 
       if parsedPath isnt false
         @doXmlHttpRequest(
           method: "GET",
-          url: serverUrl+"/list?userId="+userId+"&url="+location.href,
+          url: serverUrl+"/list?userId="+userId+"&url="+parsedPath.url,
           onload: (response) =>
             if response.status isnt 200
               console.log response
@@ -133,7 +132,7 @@ class Henk
     buttonWrapper.appendChild(henksBlock);
 
     pathname = window.location.pathname
-    if pathname.indexOf('list_messages') > 0
+    if pathname.indexOf('list_messages') > 0 or pathname.indexOf('list_message') > 0
       # Forum
       listItem = document.createElement('li')
       listItem.appendChild(buttonWrapper)
@@ -167,7 +166,7 @@ class Henk
 
     return button;
 
-  parseUrlPath: (path) ->
+  parseUrlPath: (url, path) ->
     paths = path.split '/'
 
     switch(paths[1])
@@ -176,6 +175,17 @@ class Henk
           when 'list_messages'
             contentType = 'ForumTopic'
             contentId = paths[3]
+          when 'list_message'
+            # Get the canonical link for the forum topic from the <link> tag and parse that again
+            head = document.getElementsByTagName('head')[0]
+            for link in head.getElementsByTagName('link')
+              if link.getAttribute('rel') is 'canonical'
+                url = link.getAttribute('href')
+                regexp = /.+?\:\/\/.+?(\/.+?)(?:#|\?|$)/
+                path = regexp.exec(url)
+                tempParsed = @parseUrlPath(url, path[1])
+                contentType = tempParsed.contentType
+                contentId = tempParsed.contentId
           else
             return false
       when 'nieuws'
@@ -205,7 +215,7 @@ class Henk
     if !contentType or !contentId
       return false;
 
-    parsedPath = 'contentType': contentType, 'contentId': contentId
+    parsedPath = 'contentType': contentType, 'contentId': contentId, 'url': url
     return parsedPath
 
   doXmlHttpRequest: (details) ->
