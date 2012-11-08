@@ -437,6 +437,5 @@ return array(
     'PHP_Token_WHILE' => $baseDir . '/vendor/phpunit/php-token-stream/PHP/Token.php',
     'PHP_Token_WHITESPACE' => $baseDir . '/vendor/phpunit/php-token-stream/PHP/Token.php',
     'PHP_Token_XOR_EQUAL' => $baseDir . '/vendor/phpunit/php-token-stream/PHP/Token.php',
-    'SessionHandlerInterface' => $baseDir . '/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Text_Template' => $baseDir . '/vendor/phpunit/php-text-template/Text/Template.php',
 );

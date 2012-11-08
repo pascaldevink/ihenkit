@@ -1,5 +1,6 @@
 {
   "require": {
+    "symfony/http-kernel": "2.1.x-dev",
     "silex/silex": "1.*@dev",
     "dflydev/doctrine-orm-service-provider": "1.*@dev",
     "twig/twig": ">=1.8,<2.0-dev"
@@ -9,7 +10,9 @@
     "phpunit/dbunit": ">=1.2",
     "beberlei/DoctrineExtensions": ">=0.1",
     "symfony/browser-kit": "2.1.x-dev",
-    "symfony/css-selector": "2.1.x-dev"
+    "symfony/css-selector": "2.1.x-dev",
+    "symfony/event-dispatcher": "2.1.x-dev",
+    "behat/behat": "2.4.*@stable"
   },
 
   "autoload": {
