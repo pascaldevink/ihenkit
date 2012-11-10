@@ -5,7 +5,7 @@ namespace Tweakers\IHenkIt\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class BuildController extends AnalyticsController
+class BuildController //extends AnalyticsController
 {
 	/**
 	 * @var \Tweakers\IHenkIt\Service\HenkService
@@ -19,7 +19,7 @@ class BuildController extends AnalyticsController
 
 	public function indexAction(\Silex\Application $app, Request $request)
 	{
-		$this->trackRequest($request, '/index', 'Index');
+//		$this->trackRequest($request, '/index', 'Index');
 
 		$groupedHenks = $this->henkService->getListOfHenkedContent();
 		$lastHenked = $this->henkService->getLastHenked();
@@ -42,7 +42,7 @@ class BuildController extends AnalyticsController
 
 	public function buttonAction(\Silex\Application $app, Request $request)
 	{
-		$this->trackRequest($request, '/list', 'Button');
+//		$this->trackRequest($request, '/list', 'Button');
 
 		$url = $request->get('url');
 		if (!$url)

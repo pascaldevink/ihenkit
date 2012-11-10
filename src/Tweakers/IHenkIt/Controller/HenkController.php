@@ -4,7 +4,7 @@ namespace Tweakers\IHenkIt\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class HenkController extends AnalyticsController
+class HenkController //extends AnalyticsController
 {
 	/**
 	 * @var \Tweakers\IHenkIt\Service\HenkService
@@ -18,7 +18,7 @@ class HenkController extends AnalyticsController
 
 	public function registerAction(\Silex\Application $app, Request $request)
 	{
-		$this->trackRequest($request, '/henk', 'Henk');
+//		$this->trackRequest($request, '/henk', 'Henk');
 
 		$url = $request->get('url');
 		if (!$url)
