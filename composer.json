@@ -3,7 +3,8 @@
     "symfony/http-kernel": "2.1.x-dev",
     "silex/silex": "1.*@dev",
     "dflydev/doctrine-orm-service-provider": "1.*@dev",
-    "twig/twig": ">=1.8,<2.0-dev"
+    "twig/twig": ">=1.8,<2.0-dev",
+    "united-prototype/php-ga": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",

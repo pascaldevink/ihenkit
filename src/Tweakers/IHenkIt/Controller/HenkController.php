@@ -4,7 +4,7 @@ namespace Tweakers\IHenkIt\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class HenkController
+class HenkController extends AnalyticsController
 {
 	/**
 	 * @var \Tweakers\IHenkIt\Service\HenkService
@@ -18,6 +18,8 @@ class HenkController
 
 	public function registerAction(\Silex\Application $app, Request $request)
 	{
+		$this->trackRequest($request, '/henk', 'Henk');
+
 		$url = $request->get('url');
 		if (!$url)
 			return $app->json(array('error' => array('code' => 1, 'msg' => 'no url given.')), 400);

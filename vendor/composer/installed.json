@@ -409,144 +409,6 @@
         ]
     },
     {
-        "name": "dflydev/doctrine-orm-service-provider",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider",
-            "reference": "b6693ea09cc810d6deb0afa290b5bf1763673030"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider/archive/b6693ea09cc810d6deb0afa290b5bf1763673030.zip",
-            "reference": "b6693ea09cc810d6deb0afa290b5bf1763673030",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "silex/silex": "1.*@dev",
-            "doctrine/orm": ">=2.3,<3.0"
-        },
-        "suggest": {
-            "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev"
-        },
-        "time": "2012-11-07 23:34:35",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Dflydev\\Silex\\Provider\\DoctrineOrm": "src"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Dragonfly Development Inc.",
-                "email": "info@dflydev.com",
-                "homepage": "http://dflydev.com"
-            },
-            {
-                "name": "Beau Simensen",
-                "email": "beau@dflydev.com",
-                "homepage": "http://beausimensen.com"
-            }
-        ],
-        "description": "Doctrine ORM Service Provider",
-        "keywords": [
-            "silex",
-            "orm",
-            "doctrine"
-        ]
-    },
-    {
-        "name": "silex/silex",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/fabpot/Silex.git",
-            "reference": "80c1205e2e40fcbfd1ca5fcafd1d71cde5795dfa"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/fabpot/Silex/archive/80c1205e2e40fcbfd1ca5fcafd1d71cde5795dfa.zip",
-            "reference": "80c1205e2e40fcbfd1ca5fcafd1d71cde5795dfa",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "pimple/pimple": "1.*",
-            "symfony/event-dispatcher": ">=2.1,<2.3-dev",
-            "symfony/http-foundation": ">=2.1,<2.3-dev",
-            "symfony/http-kernel": ">=2.1,<2.3-dev",
-            "symfony/routing": ">=2.1,<2.3-dev"
-        },
-        "require-dev": {
-            "monolog/monolog": ">=1.0.0,<1.2-dev",
-            "twig/twig": ">=1.8.0,<2.0-dev",
-            "swiftmailer/swiftmailer": "4.2.*",
-            "doctrine/dbal": ">=2.2.0,<2.4.0-dev",
-            "symfony/security": ">=2.1,<2.3-dev",
-            "symfony/config": ">=2.1,<2.3-dev",
-            "symfony/locale": ">=2.1,<2.3-dev",
-            "symfony/form": ">=2.1,<2.3-dev",
-            "symfony/browser-kit": ">=2.1,<2.3-dev",
-            "symfony/css-selector": ">=2.1,<2.3-dev",
-            "symfony/finder": ">=2.1,<2.3-dev",
-            "symfony/monolog-bridge": ">=2.1,<2.3-dev",
-            "symfony/process": ">=2.1,<2.3-dev",
-            "symfony/translation": ">=2.1,<2.3-dev",
-            "symfony/twig-bridge": ">=2.1,<2.3-dev",
-            "symfony/validator": ">=2.1,<2.3-dev",
-            "symfony/serializer": ">=2.1,<2.3-dev"
-        },
-        "suggest": {
-            "symfony/browser-kit": ">=2.1,<2.3-dev",
-            "symfony/css-selector": ">=2.1,<2.3-dev",
-            "symfony/dom-crawler": ">=2.1,<2.3-dev"
-        },
-        "time": "2012-11-08 15:32:35",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Silex": "src/"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Igor Wiedler",
-                "email": "igor@wiedler.ch",
-                "homepage": "http://wiedler.ch/igor/"
-            }
-        ],
-        "description": "The PHP micro-framework based on the Symfony2 Components",
-        "homepage": "http://silex.sensiolabs.org",
-        "keywords": [
-            "microframework"
-        ]
-    },
-    {
         "name": "symfony/http-foundation",
         "version": "v2.1.3",
         "version_normalized": "2.1.3.0",
@@ -596,6 +458,187 @@
         "homepage": "http://symfony.com"
     },
     {
+        "name": "united-prototype/php-ga",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Fran6co/php-ga.git",
+            "reference": "8b23388596f9b743c9329698d2242863a7729630"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/Fran6co/php-ga/archive/8b23388596f9b743c9329698d2242863a7729630.zip",
+            "reference": "8b23388596f9b743c9329698d2242863a7729630",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-07-10 07:32:51",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "UnitedPrototype\\GoogleAnalytics": "src/"
+            }
+        },
+        "license": [
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Thomas Bachem",
+                "email": "mail@thomasbachem.com"
+            }
+        ],
+        "description": "\"ga.js in PHP\" - Implementation of a generic server-side Google Analytics client in PHP that implements nearly every parameter and tracking feature of the original GA Javascript client.",
+        "homepage": "http://code.google.com/p/php-ga/",
+        "keywords": [
+            "analytics",
+            "google",
+            "server"
+        ]
+    },
+    {
+        "name": "dflydev/doctrine-orm-service-provider",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider",
+            "reference": "771977c8252b5550069b01fe1cd0c5fd98e1ab08"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/dflydev/dflydev-doctrine-orm-service-provider/archive/771977c8252b5550069b01fe1cd0c5fd98e1ab08.zip",
+            "reference": "771977c8252b5550069b01fe1cd0c5fd98e1ab08",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "silex/silex": "1.*@dev",
+            "doctrine/orm": ">=2.3,<3.0"
+        },
+        "suggest": {
+            "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev"
+        },
+        "time": "2012-11-09 15:11:44",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Dflydev\\Silex\\Provider\\DoctrineOrm": "src"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Dragonfly Development Inc.",
+                "email": "info@dflydev.com",
+                "homepage": "http://dflydev.com"
+            },
+            {
+                "name": "Beau Simensen",
+                "email": "beau@dflydev.com",
+                "homepage": "http://beausimensen.com"
+            }
+        ],
+        "description": "Doctrine ORM Service Provider",
+        "keywords": [
+            "silex",
+            "orm",
+            "doctrine"
+        ]
+    },
+    {
+        "name": "silex/silex",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/fabpot/Silex.git",
+            "reference": "960f097be06f24d7d112deaa68fa904796435b85"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/fabpot/Silex/archive/960f097be06f24d7d112deaa68fa904796435b85.zip",
+            "reference": "960f097be06f24d7d112deaa68fa904796435b85",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "pimple/pimple": "1.*",
+            "symfony/event-dispatcher": ">=2.1,<2.3-dev",
+            "symfony/http-foundation": ">=2.1,<2.3-dev",
+            "symfony/http-kernel": ">=2.1,<2.3-dev",
+            "symfony/routing": ">=2.1,<2.3-dev"
+        },
+        "require-dev": {
+            "monolog/monolog": ">=1.0.0,<1.2-dev",
+            "twig/twig": ">=1.8.0,<2.0-dev",
+            "swiftmailer/swiftmailer": "4.2.*",
+            "doctrine/dbal": ">=2.2.0,<2.4.0-dev",
+            "symfony/security": ">=2.1,<2.3-dev",
+            "symfony/config": ">=2.1,<2.3-dev",
+            "symfony/locale": ">=2.1,<2.3-dev",
+            "symfony/form": ">=2.1,<2.3-dev",
+            "symfony/browser-kit": ">=2.1,<2.3-dev",
+            "symfony/css-selector": ">=2.1,<2.3-dev",
+            "symfony/finder": ">=2.1,<2.3-dev",
+            "symfony/monolog-bridge": ">=2.1,<2.3-dev",
+            "symfony/process": ">=2.1,<2.3-dev",
+            "symfony/translation": ">=2.1,<2.3-dev",
+            "symfony/twig-bridge": ">=2.1,<2.3-dev",
+            "symfony/validator": ">=2.1,<2.3-dev",
+            "symfony/serializer": ">=2.1,<2.3-dev"
+        },
+        "suggest": {
+            "symfony/browser-kit": ">=2.1,<2.3-dev",
+            "symfony/css-selector": ">=2.1,<2.3-dev",
+            "symfony/dom-crawler": ">=2.1,<2.3-dev"
+        },
+        "time": "2012-11-09 12:34:30",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Silex": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Igor Wiedler",
+                "email": "igor@wiedler.ch",
+                "homepage": "http://wiedler.ch/igor/"
+            }
+        ],
+        "description": "The PHP micro-framework based on the Symfony2 Components",
+        "homepage": "http://silex.sensiolabs.org",
+        "keywords": [
+            "microframework"
+        ]
+    },
+    {
         "name": "symfony/event-dispatcher",
         "version": "2.1.x-dev",
         "version_normalized": "2.1.9999999.9999999-dev",
@@ -603,12 +646,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/EventDispatcher",
-            "reference": "v2.1.3"
+            "reference": "b5b6807bcc192f3a1c4fba7ef48466ebbd3c4485"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/EventDispatcher/archive/v2.1.3.zip",
-            "reference": "v2.1.3",
+            "url": "https://github.com/symfony/EventDispatcher/archive/b5b6807bcc192f3a1c4fba7ef48466ebbd3c4485.zip",
+            "reference": "b5b6807bcc192f3a1c4fba7ef48466ebbd3c4485",
             "shasum": ""
         },
         "require": {
@@ -621,7 +664,7 @@
             "symfony/dependency-injection": "2.1.*",
             "symfony/http-kernel": "2.1.*"
         },
-        "time": "2012-10-04 08:17:57",
+        "time": "2012-11-08 09:51:48",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -658,12 +701,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/HttpKernel",
-            "reference": "45f07adedfc956e07fdef8ba49f4eae402139ced"
+            "reference": "9c75c75993f009c3183696ab9ed7320f3df351b8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/symfony/HttpKernel/archive/45f07adedfc956e07fdef8ba49f4eae402139ced.zip",
-            "reference": "45f07adedfc956e07fdef8ba49f4eae402139ced",
+            "url": "https://github.com/symfony/HttpKernel/archive/9c75c75993f009c3183696ab9ed7320f3df351b8.zip",
+            "reference": "9c75c75993f009c3183696ab9ed7320f3df351b8",
             "shasum": ""
         },
         "require": {
@@ -689,7 +732,7 @@
             "symfony/dependency-injection": "2.1.*",
             "symfony/finder": "2.1.*"
         },
-        "time": "2012-10-30 02:44:33",
+        "time": "2012-11-10 10:47:17",
         "type": "library",
         "extra": {
             "branch-alias": {

@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'UnitedPrototype\\GoogleAnalytics' => $vendorDir . '/united-prototype/php-ga/src/',
     'Twig_' => $vendorDir . '/twig/twig/lib/',
     'Tweakers' => $baseDir . '/src/',
     'Symfony\\Component\\Yaml' => $vendorDir . '/symfony/yaml/',
