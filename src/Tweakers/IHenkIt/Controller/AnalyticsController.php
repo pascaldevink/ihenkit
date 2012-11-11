@@ -12,8 +12,8 @@ class AnalyticsController
 		// Assemble Visitor information
 		// (could also get unserialized from database)
 		$visitor = new \UnitedPrototype\GoogleAnalytics\Visitor();
-		$visitor->setIpAddress($_SERVER['REMOTE_ADDR']);
-		$visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
+		$visitor->setIpAddress($request->getClientIp());
+		$visitor->setUserAgent($request->server->get('HTTP_USER_AGENT'));
 //		$visitor->setScreenResolution('1024x768');
 
 		// Assemble Session information
@@ -21,8 +21,8 @@ class AnalyticsController
 		$session = new \UnitedPrototype\GoogleAnalytics\Session();
 
 		// Assemble Page information
-		$page = new \UnitedPrototype\GoogleAnalytics\Page('/page.html');
-		$page->setTitle('My Page');
+		$page = new \UnitedPrototype\GoogleAnalytics\Page($page);
+		$page->setTitle($pageTitle);
 
 		// Track page view
 		$tracker->trackPageview($page, $session, $visitor);
