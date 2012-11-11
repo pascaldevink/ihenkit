@@ -109,4 +109,18 @@ class HenkServiceTest extends \Tweakers\IHenkItTest\Lib\AbstractOrmTestCase
 		$henks = $henkService->getNumberOfHenksByContentTypeAndId('Reviews', 3422);
 		$this->assertEquals(0, $henks);
 	}
+
+	public function testHasHenked()
+	{
+		$henkService = new HenkService($this->getEntityManager());
+		$henkService->addHenk('News', 73418, 266225, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+		$henkService->addHenk('News', 73418, 266226, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+		$henkService->addHenk('Download', 29543, 266225, 'http://tweakers.net/meuktracker/29543/adium-154.html');
+
+		$hasHenked = $henkService->hasHenked(266225, 'News', 73418);
+		$this->assertTrue($hasHenked);
+
+		$hasHenked = $henkService->hasHenked(266225, 'Download', 33874);
+		$this->assertFalse($hasHenked);
+	}
 }

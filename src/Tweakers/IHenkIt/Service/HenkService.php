@@ -55,6 +55,21 @@ class HenkService
 		return $henks;
 	}
 
+	public function hasHenked($userId, $contentType, $contentId)
+	{
+		$dql = "SELECT h AS henks FROM Tweakers\IHenkIt\Entity\Henk h ".
+			"WHERE h.contentType = :contentType AND h.contentId = :contentId AND h.userId = :userId";
+
+		$query = $this->entityManager->createQuery($dql);
+		$query->setParameter('userId', $userId);
+		$query->setParameter('contentType', $contentType);
+		$query->setParameter('contentId', $contentId);
+		$query->setMaxResults(1);
+		$result = $query->getScalarResult();
+
+		return !empty($result);
+	}
+
 	public function getNumberOfHenksByContentTypeAndId($contentType, $contentId)
 	{
 		$dql = "SELECT count(h.contentType) AS henks FROM Tweakers\IHenkIt\Entity\Henk h ".

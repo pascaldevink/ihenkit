@@ -42,7 +42,7 @@ class BuildController extends AnalyticsController
 
 	public function buttonAction(\Silex\Application $app, Request $request)
 	{
-//		$this->trackRequest($request, '/list', 'Button');
+		$this->trackRequest($request, '/list', 'Button');
 
 		$url = $request->get('url');
 		if (!$url)
@@ -55,6 +55,8 @@ class BuildController extends AnalyticsController
 		if (!in_array($parsedUrl['host'], array('tweakers.net', 'gathering.tweakers.net')))
 			return $app->json(array('error' => array('code' => 4, 'msg' => 'no url to tweakers given.')), 400);
 
+		$userId = $request->get('userId');
+
 		try
 		{
 			$parsedPath = \Tweakers\IHenkIt\Util\UrlParser::parseUrlPath($parsedUrl['path']);
@@ -66,10 +68,15 @@ class BuildController extends AnalyticsController
 
 		$nrOfHenks = $this->henkService->getNumberOfHenksByContentTypeAndId($parsedPath->getContentType(), $parsedPath->getContentId());
 
+		$hasHenked = false;
+		if ($userId)
+			$hasHenked = $this->henkService->hasHenked($userId, $parsedPath->getContentType(), $parsedPath->getContentId());
+
 		$returnValue = array(
 			'contentId'		=> $parsedPath->getContentId(),
 			'contentType'	=> $parsedPath->getContentType(),
-			'henks'			=> $nrOfHenks
+			'henks'			=> $nrOfHenks,
+			'hasHenked'		=> $hasHenked,
 		);
 
 		return $app->json(
