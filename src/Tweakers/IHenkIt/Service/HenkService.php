@@ -43,18 +43,6 @@ class HenkService
 		return $henks;
 	}
 
-	public function getHenksByUserId($userId)
-	{
-		$dql = "SELECT h FROM Tweakers\IHenkIt\Entity\Henk h WHERE h.userId = :userId ORDER BY h.created DESC";
-
-		$query = $this->entityManager->createQuery($dql);
-		$query->setParameter('userId', $userId);
-		$query->setMaxResults(30);
-		$henks = $query->getResult();
-
-		return $henks;
-	}
-
 	public function hasHenked($userId, $contentType, $contentId)
 	{
 		$dql = "SELECT h AS henks FROM Tweakers\IHenkIt\Entity\Henk h ".
@@ -84,6 +72,31 @@ class HenkService
 		$nrOfHenks = $currentHenk['henks'];
 
 		return (int)$nrOfHenks;
+	}
+
+	public function getTotalNumberOfHenks()
+	{
+		$dql = "SELECT count(h.contentType) AS henks FROM Tweakers\IHenkIt\Entity\Henk h";
+
+		$query = $this->entityManager->createQuery($dql);
+		$henks = $query->getScalarResult();
+
+		$currentHenk = current($henks);
+		$nrOfHenks = $currentHenk['henks'];
+
+		return (int)$nrOfHenks;
+	}
+
+	public function getTotalNumberOfHenkedContent()
+	{
+		$dql = "SELECT h AS henks FROM Tweakers\IHenkIt\Entity\Henk h GROUP BY h.contentId, h.contentType";
+
+		$query = $this->entityManager->createQuery($dql);
+		$henks = $query->getArrayResult();
+
+		$nrOfHenks = count($henks);
+
+		return $nrOfHenks;
 	}
 
 	/**

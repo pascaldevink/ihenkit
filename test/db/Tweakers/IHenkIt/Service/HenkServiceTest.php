@@ -73,26 +73,6 @@ class HenkServiceTest extends \Tweakers\IHenkItTest\Lib\AbstractOrmTestCase
 		$this->assertEquals('Reviews', $lastHenked[3]->getContentType());
 	}
 
-	public function testGetHenksByUserId()
-	{
-		$henkService = new HenkService($this->getEntityManager());
-		$henkService->addHenk('News', 73418, 266225, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
-		$henkService->addHenk('Download', 29543, 266225, 'http://tweakers.net/meuktracker/29543/adium-154.html');
-		$henkService->addHenk('Reviews', 73418, 266225, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
-
-		$henks = $henkService->getHenksByUserId(266225);
-
-		$this->assertCount(3, $henks);
-
-		$this->assertInstanceOf('\Tweakers\IHenkIt\Entity\Henk', $henks[0]);
-		$this->assertInstanceOf('\Tweakers\IHenkIt\Entity\Henk', $henks[1]);
-		$this->assertInstanceOf('\Tweakers\IHenkIt\Entity\Henk', $henks[2]);
-
-		$this->assertEquals('News', $henks[0]->getContentType());
-		$this->assertEquals('Download', $henks[1]->getContentType());
-		$this->assertEquals('Reviews', $henks[2]->getContentType());
-	}
-
 	public function testGetNumberOfHenksByContentTypeAndId()
 	{
 		$henkService = new HenkService($this->getEntityManager());
@@ -122,5 +102,48 @@ class HenkServiceTest extends \Tweakers\IHenkItTest\Lib\AbstractOrmTestCase
 
 		$hasHenked = $henkService->hasHenked(266225, 'Download', 33874);
 		$this->assertFalse($hasHenked);
+	}
+
+	public function testGetTotalNumberOfHenks()
+	{
+		$henkService = new HenkService($this->getEntityManager());
+
+		$henks = $henkService->getTotalNumberOfHenks();
+		$this->assertEquals(0, $henks);
+
+		$henkService->addHenk('News', 73418, 266225, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+		$henkService->addHenk('News', 73418, 266226, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+		$henkService->addHenk('Download', 29543, 266225, 'http://tweakers.net/meuktracker/29543/adium-154.html');
+
+		$henks = $henkService->getTotalNumberOfHenks();
+		$this->assertEquals(3, $henks);
+	}
+
+	public function testGetTotalNumberOfHenkedContent()
+	{
+		$henkService = new HenkService($this->getEntityManager());
+
+		$henkedContent = $henkService->getTotalNumberOfHenkedContent();
+		$this->assertEquals(0, $henkedContent);
+
+		// 1.
+		$henkService->addHenk('News', 73418, 266225, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+		$henkService->addHenk('News', 73418, 266226, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+
+		// 2.
+		$henkService->addHenk('Download', 29543, 266225, 'http://tweakers.net/meuktracker/29543/adium-154.html');
+		$henkService->addHenk('Download', 29543, 266226, 'http://tweakers.net/meuktracker/29543/adium-154.html');
+
+		// 3.
+		$henkService->addHenk('Reviews', 73418, 266225, 'http://tweakers.net/nieuws/73418/hp-en-intel-blijven-itanium-ondersteunen.html');
+
+		// 4.
+		$henkService->addHenk('Reviews', 2819, 266225, 'http://tweakers.net/reviews/2819/apple-macbook-pro-13-inch-retina-ultraportable-met-puik-scherm.html');
+
+		// 5.
+		$henkService->addHenk('News', 2819, 266225, 'http://tweakers.net/nieuws/2819/star-wars-episode-1-racer-en-phantom-menace-reviews.html');
+
+		$henkedContent = $henkService->getTotalNumberOfHenkedContent();
+		$this->assertEquals(5, $henkedContent);
 	}
 }

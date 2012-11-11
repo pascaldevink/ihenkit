@@ -15,7 +15,7 @@
 			<h1>Installatie</h1>
 		</div>
 
-		<div class="span6 offset2">
+		<div class="span7 offset2">
 			<div>
 				<ul class="nav nav-tabs" id="tabs">
 					<li class="active"><a href="#firefox" data-toggle="tab">Firefox</a></li>
@@ -27,7 +27,7 @@
 
 				<div class="tab-content">
 					<div class="tab-pane active" id="firefox">
-						<ol class="pull-left">
+						<ol class="pull-left span5">
 							<li>Installeer GreaseMonkey <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">hier</a></li>
 							<li>Herstart Firefox</li>
 							<li>Installeer I Henk It via <a href="http://userscripts.org/scripts/show/151679">deze link</a></li>
@@ -36,7 +36,7 @@
 						<img src="images/firefox-logo.png" width="128" height="128" class="pull-right">
 					</div>
 					<div class="tab-pane" id="chrome">
-						<ol class="pull-left">
+						<ol class="pull-left span5">
 							<li>Installeer TamperMonkey <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo">hier</a></li>
 							<li>Installeer I Henk It via <a href="http://userscripts.org/scripts/show/151679">deze link</a></li>
 							<li>Henk artikelen en topics op <a href="http://tweakers.net">Tweakers</a></li>
@@ -44,16 +44,17 @@
 						<img src="images/chrome-logo.png" width="128" height="128" class="pull-right">
 					</div>
 					<div class="tab-pane" id="opera">
-						<ol class="pull-left">
+						<ol class="pull-left span5">
 							<li>Download <a href="js/opera/aagmfunctions.js">dit user script voor GreaseMonkey functies</a></li>
 							<li>Download het I Henk It script via <a href="http://userscripts.org/scripts/source/151679.user.js">deze link</a></li>
 							<li>Zet deze scripts in een map</li>
 							<li>Volg <a href="http://www.opera.com/docs/userjs/using/#writingscripts">deze guide</a> om de map om te zetten naar User Javascript</li>
 							<li>Henk artikelen en topics op <a href="http://tweakers.net">Tweakers</a></li>
 						</ol>
+						<img src="images/opera-logo.png" width="128" height="128" class="pull-right">
 					</div>
 					<div class="tab-pane" id="safari">
-						<ol class="pull-left">
+						<ol class="pull-left span5">
 							<li>Installeer NinjaKit <a href="https://github.com/os0x/NinjaKit">hier</a></li>
 							<li>Installeer I Henk It via <a href="http://userscripts.org/scripts/show/151679">deze link</a></li>
 							<li>Henk artikelen en topics op <a href="http://tweakers.net">Tweakers</a></li>
@@ -61,7 +62,18 @@
 						<img src="images/safari-logo.png" width="128" height="128" class="pull-right">
 					</div>
 					<div class="tab-pane" id="ie">
-						Nee. Nooit.
+						{% if random(10)>5 %}
+							<ol class="pull-left span5 unstyled">
+								<li>Nee. Nooit.</li>
+							</ol>
+						{% else %}
+							<ol class="pull-left span5">
+								<li><a href="http://getfirefox.com">Installeer</a> <a href="http://www.apple.com/safari/">een</a> <a href="http://chrome.google.com"><strong>echte</strong></a> <a href="http://www.opera.com/">browser</a></li>
+								<li>Kom dan <a href="http://ihenk.it">hier</a> terug</li>
+								<li>Henk artikelen en topics op <a href="http://tweakers.net">Tweakers</a></li>
+							</ol>
+						{% endif %}
+						<img src="images/ie-logo.png" width="128" height="128" class="pull-right">
 					</div>
 
 					<img src="images/screenshot.png">
@@ -73,6 +85,10 @@
 	<section id="statistics" class="pull-left">
 		<div class="page-header">
 			<h1>Statistieken</h1>
+		</div>
+
+		<div>
+			<p>Er zijn {{ numberOfHenkedContent }} artikelen, forum topics en profielen gehenkt met {{ numberOfHenks }} henks.</p>
 		</div>
 
 		<div class="span5">

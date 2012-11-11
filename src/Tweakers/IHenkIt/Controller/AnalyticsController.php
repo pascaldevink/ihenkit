@@ -14,7 +14,6 @@ class AnalyticsController
 		$visitor = new \UnitedPrototype\GoogleAnalytics\Visitor();
 		$visitor->setIpAddress($request->getClientIp());
 		$visitor->setUserAgent($request->server->get('HTTP_USER_AGENT'));
-//		$visitor->setScreenResolution('1024x768');
 
 		// Assemble Session information
 		// (could also get unserialized from PHP session)

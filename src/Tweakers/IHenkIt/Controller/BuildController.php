@@ -23,10 +23,14 @@ class BuildController extends AnalyticsController
 
 		$groupedHenks = $this->henkService->getListOfHenkedContent();
 		$lastHenked = $this->henkService->getLastHenked();
+		$totalNumberOfHenks = $this->henkService->getTotalNumberOfHenks();
+		$numberOfHenkedContent = $this->henkService->getTotalNumberOfHenkedContent();
 
 		$content = $app['twig']->render('index.html.twig', array(
-			'groupedHenks' => $groupedHenks,
-			'lastHenked' => $lastHenked
+			'groupedHenks'			=> $groupedHenks,
+			'lastHenked'			=> $lastHenked,
+			'numberOfHenks'			=> $totalNumberOfHenks,
+			'numberOfHenkedContent'	=> $numberOfHenkedContent,
 		));
 
 		$response = new Response(
