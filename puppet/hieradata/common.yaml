@@ -1,0 +1,110 @@
+---
+vagrantfile-local:
+    vm:
+        box: precise64
+        box_url: 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box'
+        hostname: null
+        network:
+            private_network: 192.168.56.101
+            forwarded_port: {  }
+        provider:
+            virtualbox:
+                modifyvm:
+                    name: ihenkit
+                    natdnshostresolver1: on
+                    memory: '384'
+                setextradata:
+                    VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root: 1
+        provision:
+            'shell, :path': shell/librarian-puppet-vagrant.sh
+            'shell, :inline': 'if [[ ! -f /apt-get-run ]]; then sudo apt-get update && touch /apt-get-run; fi'
+            puppet:
+                manifests_path: puppet/manifests
+                options:
+                    - --verbose
+                    - '--hiera_config /vagrant/hiera.yaml'
+                    - '--parser future'
+        synced_folder:
+            Jfr55JoKy6iG:
+                id: webroot
+                source: ./
+                target: /var/www
+                nfs: 'true'
+        usable_port_range: 2200..2250
+    ssh:
+        host: null
+        port: null
+        private_key_path: null
+        username: vagrant
+        guest_port: null
+        keep_alive: true
+        forward_agent: false
+        forward_x11: false
+        shell: 'bash -l'
+    vagrant:
+        host: ':detect'
+server:
+    packages:
+        - build-essential
+        - vim
+        - curl
+        - git-core
+    dot_files:
+        -
+            bash_aliases: null
+nginx:
+    vhosts:
+        xcPRMP1i7Qtc:
+            server_name: dev.ihenk.it
+            server_aliases:
+                - dev.www.ihenk.it
+            www_root: /var/www/web
+            listen_port: '80'
+            index_files:
+                - index.php
+            envvars:
+                - 'MYSQL_DB_HOST localhost'
+                - 'MYSQL_USERNAME henk'
+                - 'MYSQL_PASSWORD 1234567890'
+                - 'MYSQL_DB_NAME ihenkit'
+php:
+    version: '55'
+    composer:
+        install: 1
+    modules:
+        php:
+            - cli
+            - curl
+            - intl
+            - mcrypt
+        pear: {  }
+        pecl:
+            - pecl_http
+    ini:
+        display_errors: On
+        error_reporting: '-1'
+    timezone: Europe/Amsterdam
+xdebug:
+    enabled: 0
+    ini: {  }
+    install: '1'
+    settings:
+        xdebug.default_enable: '1'
+        xdebug.remote_autostart: '0'
+        xdebug.remote_connect_back: '1'
+        xdebug.remote_enable: '1'
+        xdebug.remote_handler: dbgp
+        xdebug.remote_port: '9000'
+mysql:
+    root_password: '1234567890'
+    phpmyadmin: 1
+    databases:
+        Yy7QkLuuogXy:
+            grant:
+                - ALL
+            name: ihenkit
+            host: localhost
+            user: henk
+            password: '1234567890'
+            sql_file: /var/www/structure.sql
+

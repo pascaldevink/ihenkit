@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS henk (contentType VARCHAR(255) NOT NULL, contentId INT NOT NULL, userId INT NOT NULL, created DATETIME NOT NULL, url VARCHAR(255) NOT NULL, PRIMARY KEY(contentType, contentId, userId)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
