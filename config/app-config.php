@@ -25,11 +25,14 @@ $app['henkService'] = $app->share(function($app) {
 });
 
 // Controllers
-$app['build.controller'] = $app->share(function() use ($app) {
-	return new \Tweakers\IHenkIt\Controller\BuildController($app['henkService']);
+$app['website.controller'] = $app->share(function() use ($app) {
+	return new \Tweakers\IHenkIt\Controller\WebsiteController($app['henkService']);
 });
 $app['henk.controller'] = $app->share(function() use ($app) {
 	return new \Tweakers\IHenkIt\Controller\HenkController($app['henkService']);
+});
+$app['metahenks.controller'] = $app->share(function() use ($app) {
+    return new \Tweakers\IHenkIt\Controller\MetahenksController($app['henkService']);
 });
 
 // Templating
@@ -38,8 +41,11 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 // Routing
-$app->get('/list', 'build.controller:buttonAction');
-$app->post('/henk', 'henk.controller:registerAction');
-$app->get('/', 'build.controller:indexAction');
+$app->get('/metahenks', 'metahenks.controller:listAction');
+$app->post('/henk', 'henk.controller:addHenkAction');
+$app->get('/', 'website.controller:indexAction');
+
+// Deprecated routing:
+$app->get('/list', 'metahenks.controller:listAction');
 
 return $app;

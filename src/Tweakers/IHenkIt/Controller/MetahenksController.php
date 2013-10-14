@@ -2,10 +2,12 @@
 
 namespace Tweakers\IHenkIt\Controller;
 
+use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Tweakers\IHenkIt\Exception\NotSupportedException;
+use Tweakers\IHenkIt\Util\UrlParser;
 
-class BuildController extends AnalyticsController
+class MetahenksController
 {
 	/**
 	 * @var \Tweakers\IHenkIt\Service\HenkService
@@ -17,37 +19,8 @@ class BuildController extends AnalyticsController
 		$this->henkService = $henkService;
 	}
 
-	public function indexAction(\Silex\Application $app, Request $request)
+	public function listAction(Application $app, Request $request)
 	{
-		$this->trackRequest($request, '/index', 'Index');
-
-		$groupedHenks = $this->henkService->getListOfHenkedContent();
-		$lastHenked = $this->henkService->getLastHenked();
-		$totalNumberOfHenks = $this->henkService->getTotalNumberOfHenks();
-		$numberOfHenkedContent = $this->henkService->getTotalNumberOfHenkedContent();
-
-		$content = $app['twig']->render('index.html.twig', array(
-			'groupedHenks'			=> $groupedHenks,
-			'lastHenked'			=> $lastHenked,
-			'numberOfHenks'			=> $totalNumberOfHenks,
-			'numberOfHenkedContent'	=> $numberOfHenkedContent,
-		));
-
-		$response = new Response(
-			$content,
-			200,
-			array(
-				'Cache-Control' => 'public',
-			)
-		);
-
-		return $response;
-	}
-
-	public function buttonAction(\Silex\Application $app, Request $request)
-	{
-		$this->trackRequest($request, '/list', 'Button');
-
 		$url = $request->get('url');
 		if (!$url)
 			return $app->json(array('error' => array('code' => 1, 'msg' => 'no url given.')), 400);
@@ -63,9 +36,9 @@ class BuildController extends AnalyticsController
 
 		try
 		{
-			$parsedPath = \Tweakers\IHenkIt\Util\UrlParser::parseUrlPath($parsedUrl['path']);
+			$parsedPath = UrlParser::parseUrlPath($parsedUrl['path']);
 		}
-		catch (\Tweakers\IHenkIt\Exception\NotSupportedException $nse)
+		catch (NotSupportedException $nse)
 		{
 			return $app->json(array('error' => array('code' => 600, 'msg' => 'not supported yet.')), 400);
 		}

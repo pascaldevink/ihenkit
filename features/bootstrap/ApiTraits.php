@@ -36,4 +36,21 @@ trait ApiTraits
 
 		$this->output = $client->getResponse()->getContent();
 	}
+
+    /**
+     * @Given /^The current url is already henked$/
+     */
+    public function theCurrentUrlIsAlreadyHenked()
+    {
+        $client = new \Symfony\Component\HttpKernel\Client($this->app);
+        $crawler = $client->request(
+            'POST',
+            '/henk',
+            array(
+                'userId'	=> $this->userId,
+                'url'		=> $this->url
+            ));
+
+        var_dump($client->getResponse()->getContent());
+    }
 }

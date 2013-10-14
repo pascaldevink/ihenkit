@@ -16,7 +16,7 @@ class OrmConnection
 		$driver = $configuration->newDefaultAnnotationDriver(array(__DIR__."/../../IHenkIt/Entity"), true);
 		$configuration->setMetadataDriverImpl($driver);
 		$configuration->setProxyDir('../../cache/proxies');
-		$configuration->setProxyNamespace("Tweakers\IHenkIt\Entity");
+		$configuration->setProxyNamespace("Tweakers\\IHenkIt\\Entity");
 
 		$eventManager = new EventManager();
 		$eventManager->addEventListener(array("preTestSetUp"), new SchemaSetupListener());

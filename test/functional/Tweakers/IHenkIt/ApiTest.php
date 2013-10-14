@@ -43,7 +43,7 @@ class ApiTest extends \Silex\WebTestCase
 		$response = $client->getResponse();
 		$this->assertTrue($response->isOk());
 		$this->assertInstanceOf('Symfony\Component\HttpFoundation\JsonResponse', $response);
-		$this->assertEquals('{"contentId":"85424","contentType":"News","henks":0}', $response->getContent());
+		$this->assertEquals('{"contentId":"85424","contentType":"News","henks":0,"hasHenked":false}', $response->getContent());
 	}
 
 	public function testWithPreviouslyHenkedPage()
@@ -68,6 +68,6 @@ class ApiTest extends \Silex\WebTestCase
 		$response = $client->getResponse();
 		$this->assertTrue($response->isOk());
 		$this->assertInstanceOf('Symfony\Component\HttpFoundation\JsonResponse', $response);
-		$this->assertEquals('{"contentId":"85424","contentType":"News","henks":1}', $response->getContent());
+		$this->assertEquals('{"contentId":"85424","contentType":"News","henks":1,"hasHenked":true}', $response->getContent());
 	}
 }

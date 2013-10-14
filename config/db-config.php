@@ -34,7 +34,7 @@ $app->register(new \Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvide
 			array(
 				"type" => "annotation",
 				"path" => __DIR__."/../src/Tweakers/IHenkIt/Entity",
-				"namespace" => "Tweakers\IHenkIt\Entity",
+				"namespace" => "Tweakers\\IHenkIt\\Entity",
 			),
 		),
 	),
