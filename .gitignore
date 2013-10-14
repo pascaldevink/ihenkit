@@ -1,2 +1,5 @@
 *.iml
-vendor/
+.idea
+.vagrant
+vendor
+.DS_Store
